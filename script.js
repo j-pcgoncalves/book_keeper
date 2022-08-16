@@ -6,6 +6,8 @@ const websiteNameEl = document.getElementById('website-name');
 const websiteUrlEl = document.getElementById('website-url');
 const bookmarksContainer = document.getElementById('bookmarks-container');
 
+let bookmarks = [];
+
 // Show Modal, Focus on Input
 const showModal = () => {
     modal.classList.add('show-modal');
@@ -49,6 +51,15 @@ const storeBookmark = e => {
     if (!validate(nameValue, urlValue)) {
         return false;
     }
+
+    const bookmark = {
+        name: nameValue,
+        url: urlValue,
+    };
+    bookmarks.push(bookmark);
+    localStorage.setItem('bookmarks', bookmarks);
+    bookmarkForm.reset();
+    websiteNameEl.focus();
 }
 
 // Event Listener 
