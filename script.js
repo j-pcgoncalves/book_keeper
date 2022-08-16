@@ -38,6 +38,23 @@ const validate = (nameValue, urlValue) => {
     return true;
 }
 
+// Fetch Bookmarks
+const fetchBookmarks = () => {
+    // Get bookmarks from localStorage if available
+    if (localStorage.getItem('bookmarks')) {
+        bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    } else {
+        // Create bookmarks array in localStorage
+        bookmarks = [
+            {
+                name: 'Google',
+                url: 'https://google.com',
+            },
+        ];
+        localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    }
+}
+
 // Handle Data from Form
 const storeBookmark = e => {
     e.preventDefault();
@@ -57,10 +74,16 @@ const storeBookmark = e => {
         url: urlValue,
     };
     bookmarks.push(bookmark);
-    localStorage.setItem('bookmarks', bookmarks);
+
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    fetchBookmarks();
+
     bookmarkForm.reset();
     websiteNameEl.focus();
 }
 
 // Event Listener 
 bookmarkForm.addEventListener('submit', storeBookmark);
+
+// On Load, Fetch Bookmarks
+fetchBookmarks();
