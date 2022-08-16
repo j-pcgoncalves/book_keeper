@@ -167,7 +167,7 @@ h3 {
   display: block;
 }
 
-.button {
+button {
   cursor: pointer;
   color: white;
   background: var(--primary-color);
