@@ -94,9 +94,23 @@ const fetchBookmarks = () => {
     buildBookmarks();
 }
 
+// Delete Bookmark
+const deleteBookmark = url => {
+    bookmarks.forEach((bookmark, i) => {
+        if (bookmark.url === url) {
+            bookmarks.splice(i, 1);
+        }
+    });
+
+    // Update bookmarks array in localStorage, re-populate DOM
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+    fetchBookmarks();
+}
+
 // Handle Data from Form
 const storeBookmark = e => {
     e.preventDefault();
+
     const nameValue = websiteNameEl.value;
     let urlValue = websiteUrlEl.value;
 
