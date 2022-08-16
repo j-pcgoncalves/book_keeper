@@ -46,7 +46,9 @@ const storeBookmark = e => {
         urlValue = `https://${urlValue}`;
     }
 
-    validate(nameValue, urlValue);
+    if (!validate(nameValue, urlValue)) {
+        return false;
+    }
 }
 
 // Event Listener 
